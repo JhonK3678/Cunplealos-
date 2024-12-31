@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: linear-gradient(45deg, #ff6b6b, #ff9f9f);
+            font-family: 'Pacifico', cursive;
+            overflow: hidden;
+            position: relative;
+            text-align: center;
+        }
+
+        .birthday-text {
+            font-size: 3.5em;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: bounce 2s infinite;
+            z-index: 2;
+        }
+
+        .cake {
+            font-size: 5em;
+            margin: 20px;
+            animation: rotate 3s infinite;
+            z-index: 2;
+        }
+
+        .balloons {
+            position: absolute;
+            font-size: 2em;
+            animation: float 4s infinite;
+            z-index: 2;
+        }
+
+        .sparkle {
+            position: absolute;
+            color: yellow;
+            animation: twinkle 1s infinite;
+            z-index: 1;
+        }
+
+        .gift {
+            position: absolute;
+            font-size: 2em;
+            animation: spin 4s infinite;
+            z-index: 2;
+        }
+
+        .tulip {
+            position: absolute;
+            font-size: 2.5em;
+            animation: sway 3s infinite;
+            z-index: 2;
+        }
+
+        .teddy {
+            position: absolute;
+            font-size: 3em;
+            animation: wobble 3s infinite;
+            z-index: 2;
+        }
+
+        #balloon1 { left: 20%; animation-delay: 0s; }
+        #balloon2 { left: 40%; animation-delay: 1s; }
+        #balloon3 { left: 60%; animation-delay: 2s; }
+        #balloon4 { left: 80%; animation-delay: 3s; }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+            100% { transform: rotate(-5deg); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-100px); }
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg) translateY(0); }
+            50% { transform: rotate(180deg) translateY(-20px); }
+            100% { transform: rotate(360deg) translateY(0); }
+        }
+
+        @keyframes sway {
+            0%, 100% { transform: rotate(-15deg); }
+            50% { transform: rotate(15deg); }
+        }
+
+        @keyframes wobble {
+            0%, 100% { transform: scale(1) rotate(-5deg); }
+            50% { transform: scale(1.1) rotate(5deg); }
+        }
+
+        .lyrics-screen {
+            position: absolute;
+            bottom: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid #ff9f9f;
+            box-shadow: 0 0 15px #ff9f9f;
+            width: 250px;
+            text-align: center;
+        }
+
+        .lyrics-text {
+            color: #ff9f9f;
+            font-size: 1em;
+            font-family: 'Arial', sans-serif;
+            white-space: pre-line;
+            animation: textScroll 5s linear infinite;
+            line-height: 1.5;
+        }
+
+        @keyframes textScroll {
+            0% { transform: translateY(100%); }
+            10% { transform: translateY(0); }
+            90% { transform: translateY(0); }
+            100% { transform: translateY(-100%); }
+        }
+
+        .tv-girl-lyrics {
+            position: absolute;
+            top: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.5em;
+            color: rgba(255, 255, 255, 0.8);
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            white-space: nowrap;
+            animation: fadeLyrics 6s infinite;
+        }
+
+        @keyframes fadeLyrics {
+            0%, 100% { opacity: 0; transform: translateY(10px); }
+            50% { opacity: 1; transform: translateY(0); }
+        }
+
+        .tv-girl-emoji {
+            position: absolute;
+            font-size: 3em;
+            animation: floatEmoji 6s infinite;
+        }
+
+        @keyframes floatEmoji {
+            0%, 100% { transform: translateY(0); opacity: 0; }
+            50% { transform: translateY(-30px); opacity: 1; }
+        }
+
+        .background-lyrics {
+            position: absolute;
+            font-size: 1.5em;
+            color: rgba(255, 255, 255, 0.6);
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            animation: fadeInOut 8s infinite;
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        /* Media queries para pantallas más pequeñas */
+        @media (max-width: 768px) {
+            .birthday-text {
+                font-size: 2em;
+            }
+
+            .cake {
+                font-size: 4em;
+            }
+
+            .balloons {
+                font-size: 1.5em;
+            }
+
+            .lyrics-screen {
+                width: 80%;
+                bottom: 5%;
+            }
+
+            .tv-girl-lyrics {
+                font-size: 1.2em;
+                top: 3%;
+            }
+
+            .tv-girl-emoji {
+                font-size: 2.5em;
+            }
+
+            .background-lyrics {
+                font-size: 1em;
+                left: 20%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .birthday-text {
+                font-size: 1.5em;
+            }
+
+            .cake {
+                font-size: 3.5em;
+            }
+
+            .balloons {
+                font-size: 1.2em;
+            }
+
+            .lyrics-screen {
+                width: 90%;
+                bottom: 3%;
+            }
+
+            .tv-girl-lyrics {
+                font-size: 1em;
+                top: 2%;
+            }
+
+            .tv-girl-emoji {
+                font-size: 2em;
+            }
+
+            .background-lyrics {
+                font-size: 0.8em;
+                left: 15%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="balloons" id="balloon1">🎈</div>
+        <div class="balloons" id="balloon2">🎈</div>
+        <div class="balloons" id="balloon3">🎈</div>
+        <div class="balloons" id="balloon4">🎈</div>
+        <div class="birthday-text">¡Feliz Cumpleaños!</div>
+        <div class="cake">🎂</div>
+        <div class="lyrics-screen">
+            <div class="lyrics-text" id="lyrics-text"></div>
+        </div>
+        <div class="tv-girl-lyrics" id="tv-girl-lyrics"></div>
+
+        <!-- TV Girl Emojis -->
+        <div class="tv-girl-emoji" style="left: 15%; top: 10%; animation-delay: 1s;">🎧</div>
+        <div class="tv-girl-emoji" style="left: 75%; top: 20%; animation-delay: 3s;">💔</div>
+        <div class="tv-girl-emoji" style="left: 50%; top: 60%; animation-delay: 5s;">🎶</div>
+
+        <!-- Background Lyrics -->
+        <div class="background-lyrics" style="top: 20%; left: 30%; animation-delay: 0s; font-family: 'Georgia', serif; font-size: 1.5em; color: #333;">
+            "If you want it, you can have it..."
+        </div>
+        <div class="background-lyrics" style="top: 50%; left: 70%; animation-delay: 4s; font-family: 'Georgia', serif; font-size: 1.5em; color: #333;">
+            "Lover's rock is dancing on my thumb..."
+        </div>
+        <div class="background-lyrics" style="top: 80%; left: 10%; animation-delay: 6s; font-family: 'Georgia', serif; font-size: 1.5em; color: #333;">
+            "Cigarettes out the window..."
+        </div>
+        
+        <!-- Música de fondo -->
+        <audio id="background-music" autoplay loop>
+            <source src="Cigarettes_out_the_Window_[_YouConvert.net_] (1).mp3" type="audio/mp3">
+            Tu navegador no soporta la etiqueta de audio.
+        </audio>
+        
+    </div>
+
+    <script>
+        function createElements() {
+            const container = document.querySelector('.container');
+
+            // Crear destellos
+            for (let i = 0; i < 30; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.innerHTML = '✨';
+                sparkle.style.left = Math.random() * 100 + '%';
+                sparkle.style.top = Math.random() * 100 + '%';
+                sparkle.style.animationDelay = Math.random() * 2 + 's';
+                container.appendChild(sparkle);
+            }
+
+            // Crear regalos
+            for (let i = 0; i < 8; i++) {
+                const gift = document.createElement('div');
+                gift.className = 'gift';
+                gift.innerHTML = '🎁';
+                gift.style.left = Math.random() * 90 + '%';
+                gift.style.top = Math.random() * 90 + '%';
+                gift.style.animationDelay = Math.random() * 2 + 's';
+                container.appendChild(gift);
+            }
+
+            // Crear tulipanes
+            for (let i = 0; i < 12; i++) {
+                const tulip = document.createElement('div');
+                tulip.className = 'tulip';
+                tulip.innerHTML = '🌷';
+                tulip.style.left = Math.random() * 90 + '%';
+                tulip.style.top = Math.random() * 90 + '%';
+                tulip.style.animationDelay = Math.random() * 2 + 's';
+                container.appendChild(tulip);
+            }
+
+            // Crear osito de peluche
+            const teddy = document.createElement('div');
+            teddy.className = 'teddy';
+            teddy.innerHTML = '🧸';
+            teddy.style.left = '10%';
+            teddy.style.bottom = '20%';
+            container.appendChild(teddy);
+        }
+
+        function createLyrics() {
+            const lyrics = [
+                "I threw my cigarettes out the window\nFor you ♡",
+                "And I stopped drinking heavily\nFor you ♡",
+                "But nothing seems to please you\nWhat can I do? ♡",
+                "I'm running out of things\nTo give up for you ♡",
+                "You say you'll love me when I'm older\nBut I need you now ♡",
+                "I can't wait 'til I get better\nI need you now ♡"
+            ];
+
+            let currentLyric = 0;
+            const lyricsText = document.getElementById('lyrics-text');
+
+            function updateLyrics() {
+                lyricsText.innerHTML = lyrics[currentLyric];
+                currentLyric = (currentLyric + 1) % lyrics.length;
+            }
+
+            updateLyrics();
+            setInterval(updateLyrics, 5000);
+        }
+
+        function addTVGirlLyrics() {
+            const tvGirlLyrics = [
+                "\"You say you'll love me when I'm older\" - TV Girl",
+                "\"But I need you now\" - TV Girl",
+                "\"I'm running out of things to give up\" - TV Girl",
+                "\"I threw my cigarettes out the window\" - TV Girl"
+            ];
+
+            let currentLyric = 0;
+            const tvGirlLyricsElement = document.getElementById('tv-girl-lyrics');
+
+            function updateTVGirlLyrics() {
+                tvGirlLyricsElement.textContent = tvGirlLyrics[currentLyric];
+                currentLyric = (currentLyric + 1) % tvGirlLyrics.length;
+            }
+
+            updateTVGirlLyrics();
+            setInterval(updateTVGirlLyrics, 6000);
+        }
+
+        window.onload = function() {
+            createElements(); // Llama a tu función original
+            createLyrics();   // Llama a la nueva función para las letras
+            addTVGirlLyrics(); // Agrega letras animadas de TV Girl
+        };
+    </script>
+</body>
+</html>
